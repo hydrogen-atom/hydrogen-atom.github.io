@@ -9,8 +9,6 @@
     
     <title>
         
-            Reinforcement Learning Notes-01 |
-        
         hydrogen-atom&#39;s blog
     </title>
     
@@ -205,7 +203,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        Reinforcement Learning Notes-01
+                        
                     </div>
                 
 
@@ -233,29 +231,17 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2025-04-20 20:14:22</span>
+                <span class="datetime">2025-10-10 20:43:12</span>
             </span>
 
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                    <span class="datetime" data-updated="Wed May 07 2025 20:22:27 GMT+0800">2025-05-07 20:22:27</span>
+                    <span class="datetime" data-updated="Sun Oct 12 2025 20:02:43 GMT+0800">2025-10-12 20:02:43</span>
                 </span>
             
         
 
-        
-            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="post-category-ul">
-                    
-                            <li class="category-item"><a href="/categories/Learning-Notes/">Learning Notes</a></li>
-                        
-                    
-                            <li class="category-item">&nbsp;<i class="icon fas fa-angle-right"></i>&nbsp;<a href="/categories/Learning-Notes/Reinforcement-Learning/">Reinforcement Learning</a></li>
-                        
-                    
-                </ul>
-            </span>
         
 
         
@@ -278,22 +264,47 @@
                     
 
                     
-                         <h1 id="Reinforcement-Learning-Notes-01"><a href="#Reinforcement-Learning-Notes-01" class="headerlink" title="Reinforcement Learning Notes-01"></a>Reinforcement Learning Notes-01</h1><blockquote>
-<p>接触NPV的项目已九月有余，但参与的时间非常有限：最开始的几个月读些论文，弄清NPV是个啥问题，同时尝试写Literature review。今年1-3月尝试用python复现一个启发式算法（拖了这么长是因为我是菜鸡 :upside_down_face: 且琐事太多 :weary:）。前不久刚考完IELTS，算是可以暂时闲下来几天。<br>恰逢今年deepseekR1的出现把 <code>Reinforcement Learning</code> 又推向了新的热度（笨人的想法）。同时，最近刚建了个人博客,有了记录的空间和想法（<del>急需点废话来装点门面</del>）。那么，不妨就从眼前的项目，记录学习时思考过的问题，Let’s start from scratch! :tada:</p>
-</blockquote>
-<h2 id="强化学习和深度学习的关系？"><a href="#强化学习和深度学习的关系？" class="headerlink" title="强化学习和深度学习的关系？"></a>强化学习和深度学习的关系？</h2><ul>
-<li>深度学习通过深度神经网络学习特征，深度学习主要可以分为<code>Supervised Learning</code>，<code>Unsupervised Learning</code>（当然还有<code>Semi-supervised Learning</code>以及<code>Self-supervised Learning</code>）</li>
-<li>强化学习通过与环境交互来获得最大的累计奖励，关注序列决策问题，解决<code>Markov Decision Process</code>问题</li>
-<li>事实上，传统RL并不需要DL方法，但当面临高维状态时，会引入DL的神经网络来作为函数逼近器（e.g. 用神经网络近似RL中的价值函数）</li>
-</ul>
-<h2 id="神经网络基础"><a href="#神经网络基础" class="headerlink" title="神经网络基础"></a>神经网络基础</h2><h4 id="M-P神经元模型"><a href="#M-P神经元模型" class="headerlink" title="M-P神经元模型"></a>M-P神经元模型</h4><p>简单理解为：神经元收到的总输入值与神经元阈值进行比较后，通过<strong>激活函数</strong>，进行输出.</p>
+                         <h1 id="what-is-word2vec"><a href="#what-is-word2vec" class="headerlink" title="what is word2vec?"></a>what is word2vec?</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">random_batch</span>():</span><br><span class="line">    random_inputs=[]</span><br><span class="line">    random_labels=[]      random_index=np.random.choice(<span class="built_in">range</span>(<span class="built_in">len</span>(skip_gram)),batch_size,replace=<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> random_index:</span><br><span class="line">        random_inputs.append(np.eye(voc_size)[skip_grams[i][<span class="number">0</span>]])<span class="comment">#transfer the index of targets to one-hot vector</span></span><br><span class="line">        random_labels.append(skip_gram[i][<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">return</span> random_inputs,random_labels    </span><br><span class="line">    </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">word2vec</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(word2vec,<span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.W=nn.linear(voc_size,embedding_size,bias=<span class="literal">False</span>)<span class="comment">#focus on relationship,no need bias</span></span><br><span class="line">        <span class="variable language_">self</span>.WT=nn.linear(embedding_size,voc_size,bias=<span class="literal">False</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self,x</span>):</span><br><span class="line">        hidden_layer=<span class="variable language_">self</span>.W(x)</span><br><span class="line">        output_layer=<span class="variable language_">self</span>.WT(hidden_layer)</span><br><span class="line">        <span class="keyword">return</span> output_layer</span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span> __name__=<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    batch_size=<span class="number">2</span></span><br><span class="line">    embedding_size=<span class="number">2</span></span><br><span class="line">    </span><br><span class="line">    sentences=[<span class="string">&quot;love&quot;</span>,<span class="string">&quot;suffer&quot;</span>,<span class="string">&quot;hate&quot;</span>,<span class="string">&quot;waiting&quot;</span>,<span class="string">&quot;unprecedented&quot;</span>,<span class="string">&quot;things&quot;</span>]</span><br><span class="line">    word_sequence=<span class="string">&quot; &quot;</span>.join(sentences).split()</span><br><span class="line">    word_list=<span class="built_in">list</span>(<span class="built_in">set</span>(word_sequence))</span><br><span class="line">    word_dict=&#123;w:i <span class="keyword">for</span> i,w <span class="keyword">in</span> <span class="built_in">enumerate</span>(word_list)&#125;</span><br><span class="line">    voc_size=<span class="built_in">len</span>(word_list)</span><br><span class="line">    </span><br><span class="line">    skip_grams=[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(word_sequence[i])):</span><br><span class="line">        target=word_dict[word_sequence[i]]</span><br><span class="line">        context=[word_dict[word_sequence[i-<span class="number">1</span>]],word_dict[word_sequence[i+<span class="number">1</span>]]]</span><br><span class="line">        <span class="keyword">for</span> w <span class="keyword">in</span> context:</span><br><span class="line">            skip_grams.append([target,w])</span><br><span class="line">            </span><br><span class="line">   <span class="comment">#init the model         </span></span><br><span class="line">    model=word2vec()        </span><br><span class="line">    criterion=nn.CrossEntropyLoss()</span><br><span class="line">    optimizer=optim.Adam(model.parameters(),lr=<span class="number">0.001</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5000</span>):</span><br><span class="line">        input_batch,target_batch=random_batch()</span><br><span class="line">        input_batch=torch.Tensor(input_batch)</span><br><span class="line">        target_batch=torch.LongTensor(target_batch)</span><br><span class="line">        </span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        output=model(input_batch)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#calculate the loss</span></span><br><span class="line">        loss=criterion(output,target_batch)</span><br><span class="line">        <span class="keyword">if</span>(epoch+<span class="number">1</span>)%<span class="number">1000</span>==<span class="number">0</span>:</span><br><span class="line">           <span class="built_in">print</span>(<span class="string">&#x27;Epoch:&#x27;</span>,<span class="string">&#x27;%04d&#x27;</span>%(epoch+<span class="number">1</span>),<span class="string">&#x27;cost=&#x27;</span>,<span class="string">&#x27;&#123;:.6f&#125;&#x27;</span>.<span class="built_in">format</span>(loss))</span><br><span class="line">           </span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line">        </span><br><span class="line">   <span class="comment">#visualization     </span></span><br><span class="line">    <span class="keyword">for</span> i,label <span class="keyword">in</span> <span class="built_in">enumerate</span>(word_list):</span><br><span class="line">        W,WT=model.parameters()</span><br><span class="line">        x,y=W[<span class="number">0</span>][i].item(),W[<span class="number">1</span>][i].item()</span><br><span class="line">        plt.scatter(x,y)</span><br><span class="line">        plt.annotate(label,xy=(x,y),xytext=(<span class="number">5</span>,<span class="number">2</span>),xytext(<span class="number">5</span>,<span class="number">2</span>),textcoords=<span class="string">&#x27;offset points&#x27;</span>,ha=<span class="string">&#x27;right&#x27;</span>,va=<span class="string">&#x27;bottom&#x27;</span>)</span><br><span class="line">        plt.show()</span><br><span class="line">        </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>激活函数的意义：将输入压缩为在一特定区间内的函数，将线性的问题转为非线性问题，方便进行下一个神经元的输入。由于将范围进行压缩，激活函数也被称为<code>squash function</code>.</li>
+<li><p>why using one-hot vector?</p>
+<p>W*one-hot，等于选取矩阵的某一行。</p>
+<p>通过训练W,使得语义相近的词在向量空间中距离接近。</p>
+</li>
+<li><p>How to determine whether the meanings of words are similar? How to train W?</p>
+<ul>
+<li>判断语义相近？</li>
 </ul>
-<h4 id="multi-layer-feedforward-neural-networks"><a href="#multi-layer-feedforward-neural-networks" class="headerlink" title="multi-layer feedforward neural networks"></a>multi-layer feedforward neural networks</h4><p>最基础的<code>multi-layer feedforward</code> 结构有三层：输入层，隐藏层以及输出层。其中，隐藏层和输出层会对数据进行变换。</p>
-<h4 id="error-BackPropagation"><a href="#error-BackPropagation" class="headerlink" title="error BackPropagation"></a>error BackPropagation</h4><p>对于网络的均方误差，沿其梯度的负方向进行调整，从而减小误差。<br>随之而来的问题就是可能出现局部最优的问题。<br>针对该问题，主要的解决方法有两种，分别是<code>早停</code>（在训练集误差降低但验证集误差升高之时停止训练）和<code>正则化</code>(修改误差目标函数，使网络输出的曲线更“光滑”)</p>
-<hr>
-<p>参考文献：周志华. 机器学习. 清华大学出版社,北京</p>
+<p>​    语义相近的词会在上下文出现，它们的词向量会逐渐靠近。</p>
+<ul>
+<li>训练W：</li>
+</ul>
+</li>
+</ul>
+<p>​             1.前向传播 （从头开始，输入-&gt;隐藏层-&gt;输出层）<br>​             2.损失计算 （softmax概率）<br>​             3.反向传播（梯度计算）<br>​             4.参数更新</p>
+<ul>
+<li>what is skip-gram pair?</li>
+</ul>
+<p>  [中心词，上下文词]</p>
+<ul>
+<li>what is softmax?</li>
+</ul>
+<p>  将一组得分转换为概率分布。（所有概率之和为1，得分高的项，对应的概率也高）</p>
+<ul>
+<li>how to calculate partial？<br>输出值的梯度：</li>
+</ul>
+<p>$$<br>\frac{\partial \text{loss}}{\partial \text{output}} &#x3D; \text{prob} - \text{one_hot}(0)<br>$$</p>
+<p>WT,W，hidden的更新同理，计算各值对loss的梯度。</p>
+<ul>
+<li><p>how to update parameters？<br>$$<br>\text{WT}&#x3D;\text{WT}-lr \times \frac{\partial\text{loss}}{\partial \text{WT}}<br>$$</p>
+</li>
+<li><p>During the entire training process, which parameters are updated?？</p>
+<ul>
+<li>词嵌入矩阵W（真正想要的学习结果）</li>
+<li>输出权重矩阵WT（临时更新，训练完成后被丢弃）</li>
+</ul>
+</li>
+</ul>
 
                     
                 </div>
@@ -314,22 +325,22 @@
                 
                     <div class="post-nav border-box">
                         
-                            <div class="prev-post">
-                                <a class="prev"
-                                   rel="prev"
-                                   href="/2025/10/10/what%20is%20word2vec/"
-                                   title=""
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2025/04/20/Reinforcement%20LearningNotes-01/"
+                                   title="Reinforcement Learning Notes-01"
                                 >
-                                    <span class="left arrow-icon flex-center">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis"></span>
-                                        <span class="post-nav-item">Prev posts</span>
+                                        <span class="post-nav-title-item text-ellipsis">Reinforcement Learning Notes-01</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
                                     </span>
                                 </a>
                             </div>
-                        
                         
                     </div>
                 
@@ -350,7 +361,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Reinforcement-Learning-Notes-01"><span class="nav-number">1.</span> <span class="nav-text">Reinforcement Learning Notes-01</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">强化学习和深度学习的关系？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80"><span class="nav-number">1.2.</span> <span class="nav-text">神经网络基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#M-P%E7%A5%9E%E7%BB%8F%E5%85%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">M-P神经元模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#multi-layer-feedforward-neural-networks"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">multi-layer feedforward neural networks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#error-BackPropagation"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">error BackPropagation</span></a></li></ol></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#what-is-word2vec"><span class="nav-number">1.</span> <span class="nav-text">what is word2vec?</span></a></li></ol>
     </div>
 </div>
 
@@ -488,7 +499,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Reinforcement-Learning-Notes-01"><span class="nav-number">1.</span> <span class="nav-text">Reinforcement Learning Notes-01</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">强化学习和深度学习的关系？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80"><span class="nav-number">1.2.</span> <span class="nav-text">神经网络基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#M-P%E7%A5%9E%E7%BB%8F%E5%85%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">M-P神经元模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#multi-layer-feedforward-neural-networks"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">multi-layer feedforward neural networks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#error-BackPropagation"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">error BackPropagation</span></a></li></ol></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#what-is-word2vec"><span class="nav-number">1.</span> <span class="nav-text">what is word2vec?</span></a></li></ol>
     </div>
 </div>
 
